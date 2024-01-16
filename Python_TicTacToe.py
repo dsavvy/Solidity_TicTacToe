@@ -5,19 +5,25 @@
 
 
 
-# start game
+# start game: As long as the game is running, our boolean game_active will be set to "True".
 # ! Fetch this from inFura
 game_active = True
+# We save our current player as X. When we convert to solidity, we can keep this or switch it to an int value.
 # Fetch this from InFura
 current_player = 'X'
 
 
 
-# build board
+# This builds our board. We create an empty board that will then get filled. This is not a matrix, it is just an array! :)
 # ! Fetch from InFura
 board = [" "," "," "," "," "," "," "," "," "," "]
 
-# print board
+
+# Firstly, we define all of the functions that we are going to call. 
+# Then we build a loop which represents the game Itself. In that, we call the functions one after the other.
+
+# Definition: print board
+# this puts our array in a graphical representation that is similar to a tic tac toe board you would have on paper.
 def print_board():
     print (board[1] + "|" + board[2] + "|" + board[3] )
     print (board[4] + "|" + board[5] + "|" + board[6] )
@@ -25,13 +31,16 @@ def print_board():
 print_board()
 
 
-# player selects a move
+# Definition: the current player selects a move
 def player_move():
+    # we fetch the variable and check if the game is still active
     global game_active
     while True:
+        # we ask the player for input, in which field he would like to place his marker
         var_player_move = input("Select your move: ")
         try:
             var_player_move = int(var_player_move)
+        # These are all error handling: The player cannot input a character, a number outside of 1-9 and also not if the space has already been occupied.
         except ValueError:
             print("Please enter a number between 1 and 9 to select your move")
         else:
@@ -43,6 +52,7 @@ def player_move():
             else:
                 print("Please enter a number between 1 and 9 to select your move")
 
+#! Defition: This changes the player's turn. We need to run this in solidity and fetch it here.
 def change_player():
     global current_player
     if current_player == 'X':
@@ -50,9 +60,8 @@ def change_player():
     else:
         current_player = 'X'
 
+# Definition: We check if the player has won. First we check the rows, then the columns, and lastly the diagonals.
 def winning_condition():
-    # wenn alle 3 Felder gleich sind, hat der entsprechende player gewonnen
-    # Kontrolle auf Reihen
     for i in range(1, 10, 3):
         if board[i] == board[i+1] == board[i+2] != " ":
             return board[i]
@@ -62,17 +71,15 @@ def winning_condition():
     if board[1] == board[5] == board[9] != " " or board[3] == board[5] == board[7] != " ":
         return board[5]
         
-
+# We check for a tie by checking if the board is full and the winning condition has not been met.
 def tie_condition():
     return ' ' not in board[1:]
-# move is being sent to infura
-#[]
 
 
-# loop while playing
-print_board()
+
+# loop while playing: 1. Print Board. 2. print turn of player. 3. Player Input. 4. Set current player's name in the selected field. 
+# 5. Check winning condition. 6. Change player if it has not been met.
 while game_active:
-    # Eingabe des aktiven players
     print()
     print ("Turn of Player " + current_player)
     move = player_move()
@@ -84,6 +91,7 @@ while game_active:
         won = winning_condition()
         if won:
             print ("player " + won + " has won!")
+            # We just terminate the game. 
             game_active = False
             break
         # Check if tie
@@ -91,6 +99,6 @@ while game_active:
         if tie:
             print ("Game has ended with a tie")
             game_active = False
-        # player wechseln
+        # Change player
         change_player()
 print()
