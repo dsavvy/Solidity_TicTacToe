@@ -1,10 +1,8 @@
 # import packages
-from web3 import Web3, HTTPProvider
+
 
 # connect to infura
 
-connection = Web3(HTTPProvider('https://mainnet.infura.io/v3/ae6ebad4a80b46299b5ea14e4d506af9'))
-print ("Latest Ethereum block number", connection.eth.blockNumber)
 
 
 # start game
@@ -18,7 +16,6 @@ current_player = 'X'
 # build board
 # ! Fetch from InFura
 board = [" "," "," "," "," "," "," "," "," "," "]
-
 
 # print board
 def print_board():
@@ -45,7 +42,7 @@ def player_move():
                     print("Selected move is already occupied. Please select another move.")
             else:
                 print("Please enter a number between 1 and 9 to select your move")
-                
+
 def change_player():
     global current_player
     if current_player == 'X':
