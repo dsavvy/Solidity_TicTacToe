@@ -1,0 +1,149 @@
+"abi": [
+            {
+                "anonymous": false,
+                "inputs": [],
+                "name": "GameTied",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "player",
+                        "type": "string"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "move",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "PlayerMoveMade",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [],
+                "name": "PlayerMoveRequested",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "player",
+                        "type": "string"
+                    }
+                ],
+                "name": "PlayerWon",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "boardRow1",
+                        "type": "string"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "boardRow2",
+                        "type": "string"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "boardRow3",
+                        "type": "string"
+                    }
+                ],
+                "name": "PrintBoard",
+                "type": "event"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "board",
+                "outputs": [
+                    {
+                        "internalType": "string",
+                        "name": "",
+                        "type": "string"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "currentPlayer",
+                "outputs": [
+                    {
+                        "internalType": "string",
+                        "name": "",
+                        "type": "string"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "gameActive",
+                "outputs": [
+                    {
+                        "internalType": "bool",
+                        "name": "",
+                        "type": "bool"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "move",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "makePlayerMove",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "requestPlayerMove",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            }
+        ],
+        "devdoc": {
+            "custom:dev-run-script": "\"contracts/artifacts/TicTacToe.json\"",
+            "details": "A simple smart contract implementation of Tic Tac Toe",
+            "kind": "dev",
+            "methods": {},
+            "title": "TicTacToe",
+            "version": 1
+        },
+        "userdoc": {
+            "kind": "user",
+            "methods": {},
+            "version": 1
+        }

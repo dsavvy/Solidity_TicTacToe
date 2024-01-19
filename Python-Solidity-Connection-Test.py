@@ -2,7 +2,18 @@
 # install Web3 with command pip install web3 first
 # set up infura api
 from web3 import Web3, HTTPProvider
-connection = Web3(HTTPProvider('https://goerli.infura.io/v3/ae6ebad4a80b46299b5ea14e4d506af9'))
+import json
+
+
+infura_url = "https://sepolia.infura.io/v3/ae6ebad4a80b46299b5ea14e4d506af9"
+contract_address = "0xC8B9a188E5840FFba434645F3F3E457f578433F1"
+private_key = "6fc7e8886a758928643340a762dab4006bae5c92aace056c0a1846ae65f34287"
+
+
+
+connection = Web3(HTTPProvider(infura_url))
+tic_tac_toe_contract = connection.eth.contract(address=contract_address, abi=contract_abi)
+
 
 
 # get latest ethereum block number through infura
@@ -10,7 +21,8 @@ print ("Latest Ethereum block number", connection.eth.block_number)
 # import packages
 
 
-# connect to infura
+contract_abi = json.load("abi.json")
+
 
 
 
