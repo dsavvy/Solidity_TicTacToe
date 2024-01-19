@@ -4,11 +4,17 @@
 from web3 import Web3, HTTPProvider
 import json
 
-
+# URL to Infura API
 infura_url = "https://sepolia.infura.io/v3/ae6ebad4a80b46299b5ea14e4d506af9"
+# Adress of the current compiled contract. CHANGE when we compile a new contract.
 contract_address = "0xC8B9a188E5840FFba434645F3F3E457f578433F1"
+# Private Key from MetaMask. For Sepolia Test Network. Mnemonic phrase written down to access account.
 private_key = "6fc7e8886a758928643340a762dab4006bae5c92aace056c0a1846ae65f34287"
+# ABI file. In github -> Download and put it next to alle the other files.
+file_path = "abi.json"
 
+with open(file_path, "r") as file:
+    contract_abi = json.load(file)
 
 
 connection = Web3(HTTPProvider(infura_url))
@@ -19,12 +25,6 @@ tic_tac_toe_contract = connection.eth.contract(address=contract_address, abi=con
 # get latest ethereum block number through infura
 print ("Latest Ethereum block number", connection.eth.block_number)
 # import packages
-
-
-file_path = "abi.json"
-
-with open(file_path, "r") as file:
-    contract_abi = json.load(file)
 
 
 

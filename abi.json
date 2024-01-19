@@ -1,4 +1,4 @@
-"abi": [
+        [
             {
                 "anonymous": false,
                 "inputs": [],
@@ -133,17 +133,4 @@
                 "stateMutability": "nonpayable",
                 "type": "function"
             }
-        ],
-        "devdoc": {
-            "custom:dev-run-script": "\"contracts/artifacts/TicTacToe.json\"",
-            "details": "A simple smart contract implementation of Tic Tac Toe",
-            "kind": "dev",
-            "methods": {},
-            "title": "TicTacToe",
-            "version": 1
-        },
-        "userdoc": {
-            "kind": "user",
-            "methods": {},
-            "version": 1
-        }
+        ]
