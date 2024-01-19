@@ -21,8 +21,10 @@ print ("Latest Ethereum block number", connection.eth.block_number)
 # import packages
 
 
-contract_abi = json.load("abi.json")
+file_path = "abi.json"
 
+with open(file_path, "r") as file:
+    contract_abi = json.load(file)
 
 
 
