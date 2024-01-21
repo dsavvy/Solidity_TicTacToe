@@ -19,8 +19,25 @@ contract TicTacToe {
     event PlayerMoveMade(string player, uint256 move);
     event PlayerWon(string player, int Xwins, int Owins);
     event GameTied();
+    event EndsiegAchieved(string message);
+    event GameReset();
+
+    function ResetGame () external {
+      emit GameReset();
+      board = [" "," "," "," "," "," "," "," "," "," "];
+      gameActive = true;
+      Xwins = 0;
+      Owins = 0;
+    }
 
     function printBoard() external {
+        emit PrintBoard(
+            string(abi.encodePacked(board[1], "|", board[2], "|", board[3])),
+            string(abi.encodePacked(board[4], "|", board[5], "|", board[6])),
+            string(abi.encodePacked(board[7], "|", board[8], "|", board[9]))
+        );
+    }
+      function printBoardint() internal {
         emit PrintBoard(
             string(abi.encodePacked(board[1], "|", board[2], "|", board[3])),
             string(abi.encodePacked(board[4], "|", board[5], "|", board[6])),
@@ -43,21 +60,36 @@ contract TicTacToe {
 
         // Check winning condition
         if (checkWinningCondition()) {
-            if (keccak256(abi.encodePacked(currentPlayer)) == keccak256(abi.encodePacked('X'))) {
+          if (keccak256(abi.encodePacked(currentPlayer)) == keccak256(abi.encodePacked('X'))) {
                 Xwins = Xwins+1;
+                emit PlayerWon(currentPlayer, Xwins, Owins);
+                board = [" "," "," "," "," "," "," "," "," "," "];
             }
-            else {
+          else {
                 Owins = Owins+1;
+                emit PlayerWon(currentPlayer, Xwins, Owins);
+                board = [" "," "," "," "," "," "," "," "," "," "];
             }
-            emit PlayerWon(currentPlayer, Xwins, Owins);
-            board = [" "," "," "," "," "," "," "," "," "," "];
-        } else if (checkTieCondition()) {
+        }
+         else if (checkTieCondition()) {
             emit GameTied();
             board = [" "," "," "," "," "," "," "," "," "," "];
+         }
             
-        } else {
+        else {
             // Change player
             changePlayer();
+        }
+        if (Xwins == 3) {
+        gameActive = false;
+        emit EndsiegAchieved("Player X has won the Best-of-Five");
+        }
+        else if (Owins == 3) {
+        gameActive = false;
+        emit EndsiegAchieved("Player O has won the Best-of-Five");
+        }
+        else {
+        return printBoardint();
         }
     }
 
@@ -98,4 +130,3 @@ contract TicTacToe {
         return true;
     }
 }
-
