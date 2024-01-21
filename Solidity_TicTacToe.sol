@@ -34,7 +34,7 @@ contract TicTacToe {
 
     function makePlayerMove(uint256 move) external {
         require(gameActive, "Game is not active");
-        require(move < 0 && move > 9, "Invalid move. Please enter a number between 1 and 9.");
+        require(move >= 1 && move <= 9, "Invalid move. Please enter a number between 1 and 9.");
 
         require(bytes(board[move])[0] == bytes(" ")[0], "Selected move is already occupied. Please select another move.");
 
@@ -43,7 +43,7 @@ contract TicTacToe {
 
         // Check winning condition
         if (checkWinningCondition()) {
-            if currentPlayer = "X" {
+            if (keccak256(abi.encodePacked(currentPlayer)) == keccak256(abi.encodePacked('X'))) {
                 Xwins = Xwins+1;
             }
             else {
@@ -78,12 +78,15 @@ contract TicTacToe {
                 return true;
             }
         }
-        if ((bytes(board[1]).length == 1 && bytes(board[1])[0] == bytes(board[5])[0] && bytes(board[1])[0] == bytes(board[9])[0]) ||
+        if ((bytes(board[1]).length == 1 && bytes(board[1])[0] == bytes(board[5])[0] && bytes(board[1])[0] == bytes(board[9])[0] &&
+            bytes(board[5])[0] != bytes(" ")[0]) ||
             (bytes(board[3]).length == 1 && bytes(board[3])[0] == bytes(board[5])[0] && bytes(board[3])[0] == bytes(board[7])[0]) &&
             bytes(board[5])[0] != bytes(" ")[0]) {
             return true;
         }
+        else {
         return false;
+        }
     }
 
     function checkTieCondition() internal view returns (bool) {

@@ -23,9 +23,9 @@ tic_tac_toe_contract = connection.eth.contract(address=contract_address, abi=con
 
 
 # Test to make a function. Errors still. # Error probably between python -> Metamask -> Contract. Something missing maybe?
-transaction_hash = tic_tac_toe_contract.functions.requestPlayerMove().transact()
+transaction_hash = tic_tac_toe_contract.functions.printBoard().transact()
 connection.eth.waitForTransactionReceipt(transaction_hash)
-event_filter = contract.events.PlayerMoveRequested.createFilter(fromBlock="latest")
+event_filter = contract.events.PrintBoard.createFilter(fromBlock="latest")
 events = event_filter.get_all_entries()
 for event in events:
     print(event)
