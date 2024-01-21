@@ -8,19 +8,19 @@ pragma solidity ^0.8.0;
  * @custom:dev-run-script "contracts/artifacts/TicTacToe.json"
  */
 contract TicTacToe {
-    address public owner;
-    
     bool public gameActive = true;
     string public currentPlayer = 'X';
     string[10] public board = [" "," "," "," "," "," "," "," "," "," "];
+    int public Xwins = 0;
+    int public Owins = 0;
 
     event PrintBoard(string boardRow1, string boardRow2, string boardRow3);
     event PlayerMoveRequested();
     event PlayerMoveMade(string player, uint256 move);
-    event PlayerWon(string player);
+    event PlayerWon(string player, int Xwins, int Owins);
     event GameTied();
 
-    function printBoard() internal {
+    function printBoard() external {
         emit PrintBoard(
             string(abi.encodePacked(board[1], "|", board[2], "|", board[3])),
             string(abi.encodePacked(board[4], "|", board[5], "|", board[6])),
@@ -43,11 +43,18 @@ contract TicTacToe {
 
         // Check winning condition
         if (checkWinningCondition()) {
-            emit PlayerWon(currentPlayer);
-            gameActive = false;
+            if currentPlayer = "X" {
+                Xwins = Xwins+1;
+            }
+            else {
+                Owins = Owins+1;
+            }
+            emit PlayerWon(currentPlayer, Xwins, Owins);
+            board = [" "," "," "," "," "," "," "," "," "," "];
         } else if (checkTieCondition()) {
             emit GameTied();
-            gameActive = false;
+            board = [" "," "," "," "," "," "," "," "," "," "];
+            
         } else {
             // Change player
             changePlayer();

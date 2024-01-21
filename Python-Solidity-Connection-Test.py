@@ -7,8 +7,9 @@ import json
 # URL to Infura API
 infura_url = "https://sepolia.infura.io/v3/ae6ebad4a80b46299b5ea14e4d506af9"
 # Adress of the current compiled contract. CHANGE when we compile a new contract.
-contract_address = "0xC8B9a188E5840FFba434645F3F3E457f578433F1"
-# Private Key from MetaMask. For Sepolia Test Network. Mnemonic phrase written down to access account.
+contract_address = "0x7AF458610332Ae84d25B600ef0b5a432768f322A"
+# Private Key fro
+# ,m MetaMask. For Sepolia Test Network. Mnemonic phrase written down to access account.
 private_key = "6fc7e8886a758928643340a762dab4006bae5c92aace056c0a1846ae65f34287"
 # ABI file. In github -> Download and put it next to alle the other files.
 file_path = "abi.json"
@@ -20,6 +21,14 @@ with open(file_path, "r") as file:
 connection = Web3(HTTPProvider(infura_url))
 tic_tac_toe_contract = connection.eth.contract(address=contract_address, abi=contract_abi)
 
+
+# Test to make a function. Errors still. # Error probably between python -> Metamask -> Contract. Something missing maybe?
+transaction_hash = tic_tac_toe_contract.functions.requestPlayerMove().transact()
+connection.eth.waitForTransactionReceipt(transaction_hash)
+event_filter = contract.events.PlayerMoveRequested.createFilter(fromBlock="latest")
+events = event_filter.get_all_entries()
+for event in events:
+    print(event)
 
 
 # get latest ethereum block number through infura
