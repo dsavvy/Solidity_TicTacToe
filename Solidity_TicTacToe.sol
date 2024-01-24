@@ -27,7 +27,7 @@ contract TicTacToe {
     // Emit when someone has won a single game and show the score.
     event PlayerWon(string player, int Xwins, int Owins);
     // Emit if the Game ends tied.
-    event GameTied();
+    event GameTied(string message, int Xwins, int Owins);
     // Emit if a player has won three games.
     event EndsiegAchieved(string message);
     // Resets the game.
@@ -92,7 +92,7 @@ contract TicTacToe {
         }
         // Check Tie Condition by calling the function.
          else if (checkTieCondition()) {
-            emit GameTied();
+            emit GameTied("The game has ended in a tie", Xwins, Owins);
             board = [" "," "," "," "," "," "," "," "," "," "];
          }
             
